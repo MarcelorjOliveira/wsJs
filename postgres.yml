@@ -1,0 +1,21 @@
+version: '2'
+
+networks:
+  vpcboot:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 17.5.0.0/16
+         gateway: 17.5.0.1
+
+services:
+    postgresdb:
+        image: postgres:9
+        volumes:
+            - "./.postgres:/var/lib/postgresql/data"
+        environment:
+           POSTGRES_PASSWORD: 46jpw4
+           POSTGRES_DB: transportapi
+        networks:
+            vpcboot:
+                ipv4_address: 17.5.0.7
